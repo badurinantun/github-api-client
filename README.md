@@ -1,1 +1,19 @@
-# github-api-client
+# Github Api Client
+
+React application using TypeScript that connects to the GitHub API.
+
+## Development 🛠
+
+Install the dependencies
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the application.
