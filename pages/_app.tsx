@@ -16,7 +16,7 @@ export default withApollo(({ initialState }) => {
     uri: GRAPHQL_URL,
     cache: new InMemoryCache().restore(initialState || {}),
     request: (operation) => {
-      const token = process.env.ACCESS_TOKEN;
+      const token = process.env.token;
 
       operation.setContext({
         headers: {
