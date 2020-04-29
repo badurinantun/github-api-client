@@ -3,10 +3,12 @@ import { useLazyQuery } from '@apollo/react-hooks';
 
 import { useSearchDebounce } from '../src/hooks/useSearchDebounce';
 import { SEARCH_USERS } from '../src/graphql/queries/search';
+import { UserSearchResult } from '../src/interfaces/UserSearchResult';
+import { SearchData } from '../src/interfaces/SearchData';
 
 function HomePage() {
   const [query, setQuery] = React.useState('');
-  const [searchUsers, { data, error, loading }] = useLazyQuery(SEARCH_USERS);
+  const [searchUsers, { data, error, loading }] = useLazyQuery<SearchData<UserSearchResult>>(SEARCH_USERS);
 
   useSearchDebounce(
     () => {

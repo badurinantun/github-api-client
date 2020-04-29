@@ -5,8 +5,6 @@ export const SearchFragments = {
     fragment SearchUser on User {
       id
       login
-      name
-      email
     }
   `,
   pageInfo: gql`

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function useSearchDebounce(searchFn: Function, time: number = 0, query: string) {
+export function useSearchDebounce(searchFn: Function, time = 0, query: string) {
   const timeoutId = React.useRef<ReturnType<typeof setTimeout>>();
   const callback = React.useRef(searchFn);
 
