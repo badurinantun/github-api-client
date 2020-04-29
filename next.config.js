@@ -1,5 +1,8 @@
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
-  env: {
-    accessToken: 'd1137b9aa614a5145c3e5c1b2dca9159e044a201',
+  webpack: (config) => {
+    config.plugins.push(new Dotenv({ silent: true }));
+    return config;
   },
 };
