@@ -1,16 +1,35 @@
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import React from 'react';
+import { useLazyQuery } from '@apollo/react-hooks';
+
+import { useSearchDebounce } from '../src/hooks/useSearchDebounce';
+import { SEARCH_USERS } from '../src/graphql/queries/search';
 
 function HomePage() {
-  const { data, error, loading } = useQuery(gql`
-    {
-      viewer {
-        login
-      }
-    }
-  `);
+  const [query, setQuery] = React.useState('');
+  const [searchUsers, { data, error, loading }] = useLazyQuery(SEARCH_USERS);
 
-  return <pre>{JSON.stringify({ data, error, loading }, null, 2)}</pre>;
+  useSearchDebounce(
+    () => {
+      searchUsers({
+        variables: {
+          query,
+        },
+      });
+    },
+    500,
+    query,
+  );
+
+  const handleSearch = (event: React.SyntheticEvent<HTMLInputElement>) => {
+    setQuery(event.currentTarget.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={query} onChange={handleSearch} />
+      <pre>{JSON.stringify({ loading, error, data }, null, 2)}</pre>
+    </div>
+  );
 }
 
 export default HomePage;
