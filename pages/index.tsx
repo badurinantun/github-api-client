@@ -45,7 +45,7 @@ function HomePage() {
           {data.search.nodes.map(({ id, login }) => (
             <div key={id}>
               <div>
-                <Link href="/user/[login]" as={`/user/${login}`}>
+                <Link href="/profile/[login]" as={`/profile/${login}`}>
                   <a>{login}</a>
                 </Link>
               </div>
