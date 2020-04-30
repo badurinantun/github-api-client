@@ -1,16 +1,26 @@
 import React from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
+import Link from 'next/link';
 
-import { useSearchDebounce } from '../src/hooks/useSearchDebounce';
+import { useDebounce } from '../src/hooks/useDebounce';
 import { SEARCH_USERS } from '../src/graphql/queries/search';
 import { UserSearchResult } from '../src/interfaces/UserSearchResult';
 import { SearchData } from '../src/interfaces/SearchData';
+import { Results } from '../src/components/results';
+import { Pagination } from '../src/components/pagination';
+import { usePagination } from '../src/hooks/usePagination';
 
 function HomePage() {
+  const { pagination, next, previous } = usePagination(10);
   const [query, setQuery] = React.useState('');
-  const [searchUsers, { data, error, loading }] = useLazyQuery<SearchData<UserSearchResult>>(SEARCH_USERS);
 
-  useSearchDebounce(
+  const [searchUsers, { data, error, loading }] = useLazyQuery<SearchData<UserSearchResult>>(SEARCH_USERS, {
+    variables: {
+      ...pagination,
+    },
+  });
+
+  useDebounce(
     () => {
       searchUsers({
         variables: {
@@ -19,7 +29,7 @@ function HomePage() {
       });
     },
     500,
-    query,
+    [query],
   );
 
   const handleSearch = (event: React.SyntheticEvent<HTMLInputElement>) => {
@@ -29,7 +39,21 @@ function HomePage() {
   return (
     <div>
       <input type="text" value={query} onChange={handleSearch} />
-      <pre>{JSON.stringify({ loading, error, data }, null, 2)}</pre>
+      <pre>{JSON.stringify({ loading, error }, null, 2)}</pre>
+      {data?.search && (
+        <Results totalCount={data.search.userCount}>
+          {data.search.nodes.map(({ id, login }) => (
+            <div key={id}>
+              <div>
+                <Link href="/user/[login]" as={`/user/${login}`}>
+                  <a>{login}</a>
+                </Link>
+              </div>
+            </div>
+          ))}
+          <Pagination pageInfo={data.search.pageInfo} next={next} previous={previous} />
+        </Results>
+      )}
     </div>
   );
 }

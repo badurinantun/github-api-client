@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function useSearchDebounce(searchFn: Function, time = 0, query: string) {
+export function useDebounce(searchFn: Function, time = 0, deps: React.DependencyList = []) {
   const timeoutId = React.useRef<ReturnType<typeof setTimeout>>();
   const callback = React.useRef(searchFn);
 
@@ -24,5 +24,6 @@ export function useSearchDebounce(searchFn: Function, time = 0, query: string) {
     return () => {
       cancel();
     };
-  }, [query, cancel, time]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...deps, cancel, time]);
 }
