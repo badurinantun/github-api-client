@@ -5,11 +5,11 @@ import { CommonFragments } from '../fragments/common';
 export const GET_PROFILE = gql`
   query getProfile($login: String!) {
     user(login: $login) {
-      ...UserProfile
+      ...User
     }
   }
 
-  ${ProfilePageFragments.user}
+  ${CommonFragments.user}
 `;
 
 export const SEARCH_REPOSITORIES = gql`

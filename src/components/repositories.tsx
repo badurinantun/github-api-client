@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { css } from '@emotion/core';
 
 import { usePagination } from '../hooks/usePagination';
 import { SEARCH_REPOSITORIES } from '../graphql/queries/profilePage';
@@ -8,6 +9,10 @@ import { Results } from './results';
 import { Pagination } from './pagination';
 import { SortDirection } from '../enums/SortDirection';
 import { RepositoryOrder } from '../interfaces/RepositoryOrder';
+import { RepositoryCard } from './repositoryCard';
+import { Theme } from '../theme/theme';
+import { Spinner } from './spinner';
+import { Button } from './button';
 
 interface RepositoriesProps {
   login: string;
@@ -39,25 +44,59 @@ export const Repositories: React.FC<RepositoriesProps> = ({ login }) => {
     });
   };
 
+  const sortLabel = orderBy?.direction === SortDirection.ASC ? 'descending' : 'ascending';
+
   return (
     <React.Fragment>
-      {loading && <p>Loading...</p>}
       {error && <pre>{JSON.stringify({ error }, null, 2)}</pre>}
 
+      {loading && (
+        <div
+          css={css`
+            grid-column: 1 / -1;
+          `}
+        >
+          <div
+            css={(theme: Theme) => css`
+              display: flex;
+              padding: ${theme.spacing(5)};
+              justify-content: center;
+            `}
+          >
+            <Spinner />
+          </div>
+        </div>
+      )}
+
       {data && (
-        <Results totalCount={data.user.repositories.totalCount}>
-          {data.user.repositories.nodes.map(({ id, name, description, url }) => (
-            <div key={id}>
-              <h3>{name}</h3>
-              <p>{description}</p>
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                link
-              </a>
+        <Results title="Repositories" totalCount={data.user.repositories.totalCount}>
+          {data.user.repositories.nodes.map((repository) => (
+            <div
+              key={repository.id}
+              css={(theme: Theme) =>
+                css`
+                  margin-bottom: ${theme.spacing(3)};
+                `
+              }
+            >
+              <RepositoryCard repostiory={repository} />
             </div>
           ))}
-          <button onClick={handleSort}>sort</button>
 
-          <Pagination pageInfo={data.user.repositories.pageInfo} next={next} previous={previous} />
+          <div
+            css={css`
+              display: flex;
+            `}
+          >
+            <Button onClick={handleSort}>Sort {sortLabel}</Button>
+            <div
+              css={css`
+                flex: 1;
+              `}
+            >
+              <Pagination pageInfo={data.user.repositories.pageInfo} next={next} previous={previous} />
+            </div>
+          </div>
         </Results>
       )}
     </React.Fragment>

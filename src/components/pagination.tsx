@@ -1,6 +1,8 @@
 import React from 'react';
+import { css } from '@emotion/core';
 
 import { PageInfo } from '../interfaces/PageInfo';
+import { Button } from './button';
 
 interface PaginationProps {
   pageInfo: PageInfo;
@@ -15,13 +17,22 @@ export const Pagination: React.FC<PaginationProps> = ({
   previous,
 }) => {
   return (
-    <>
-      <button disabled={!hasPreviousPage} onClick={() => previous(startCursor)}>
-        previous
-      </button>
-      <button disabled={!hasNextPage} onClick={() => next(endCursor)}>
-        next
-      </button>
-    </>
+    <div
+      css={css`
+        display: flex;
+      `}
+    >
+      {hasPreviousPage && <Button onClick={() => previous(startCursor)}>Previous</Button>}
+      {hasNextPage && (
+        <Button
+          css={css`
+            margin-left: auto;
+          `}
+          onClick={() => next(endCursor)}
+        >
+          Next
+        </Button>
+      )}
+    </div>
   );
 };

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 
-import { HomePageFragments } from '../fragments/homePage';
 import { CommonFragments } from '../fragments/common';
 
 export const SEARCH_USERS = gql`
@@ -11,11 +10,11 @@ export const SEARCH_USERS = gql`
         ...PageInfo
       }
       nodes {
-        ...SearchUser
+        ...User
       }
     }
   }
 
   ${CommonFragments.pageInfo}
-  ${HomePageFragments.user}
+  ${CommonFragments.user}
 `;

@@ -8,9 +8,9 @@ export const Grid: React.FC = ({ children }) => (
     css={(theme: Theme) => css`
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      column-gap: ${theme.spacing(5)}px;
-      padding: ${theme.spacing(4)}px;
-      margin: 0 -${theme.spacing(4)}px;
+      column-gap: ${theme.spacing(5)};
+      padding: ${theme.spacing(5)};
+      margin: 0 -${theme.spacing(5)};
 
       @media (min-width: ${theme.breakpoints.md}) {
         grid-template-columns: repeat(8, 1fr);

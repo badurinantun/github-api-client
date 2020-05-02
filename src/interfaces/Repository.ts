@@ -3,4 +3,8 @@ export interface Repository {
   name: string;
   description: string;
   url: string;
+  primaryLanguage: {
+    color: string;
+    name: string;
+  };
 }
