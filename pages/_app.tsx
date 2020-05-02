@@ -2,12 +2,50 @@ import React from 'react';
 import withApollo from 'next-with-apollo';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { ThemeProvider } from 'emotion-theming';
+import { Global, css } from '@emotion/core';
+
+import { theme, Theme } from '../src/theme/theme';
 
 const GRAPHQL_URL = 'https://api.github.com/graphql';
 
 const App = ({ Component, pageProps, apollo }) => (
   <ApolloProvider client={apollo}>
-    <Component {...pageProps} />
+    <ThemeProvider theme={theme}>
+      <Global
+        styles={(theme: Theme) => css`
+          *,
+          *::before,
+          *::after {
+            box-sizing: border-box;
+          }
+
+          body,
+          h1,
+          h2,
+          h3,
+          h4,
+          p {
+            margin: 0;
+          }
+
+          body {
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            text-rendering: optimizeSpeed;
+            background-color: ${theme.colors.primary};
+            color: ${theme.colors.secondary};
+            font-family: ${theme.typography.fontFamily};
+          }
+
+          input,
+          button {
+            font: inherit;
+          }
+        `}
+      />
+      <Component {...pageProps} />
+    </ThemeProvider>
   </ApolloProvider>
 );
 
