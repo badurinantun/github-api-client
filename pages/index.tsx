@@ -18,7 +18,7 @@ import { UserCard } from '../src/components/userCard';
 
 function HomePage() {
   const { pagination, next, previous } = usePagination(5);
-  const [query, setQuery] = React.useState('badurina');
+  const [query, setQuery] = React.useState('');
 
   const [searchUsers, { data, error, loading }] = useLazyQuery<SearchData<UserSearchResult>>(SEARCH_USERS, {
     variables: {
@@ -82,7 +82,7 @@ function HomePage() {
         {!loading && data?.search && (
           <Results title="users" totalCount={data.search.userCount}>
             {data.search.edges.map(({ node: user, textMatches }) => (
-              <Link key={user.id} href="/profile/[login]" as={`/profile/${user.login}`}>
+              <Link key={user.id} href="/profile/[profile]" as={`/profile/${user.login}`}>
                 <div
                   css={(theme: Theme) => css`
                     cursor: pointer;
