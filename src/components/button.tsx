@@ -12,6 +12,7 @@ export const Button: React.FC<React.ComponentProps<'button'>> = (props) => (
 
       color: ${theme.colors.highlight};
       border: 1px solid ${theme.colors.border};
+      background-color: ${theme.colors.white};
       border-radius: 3px;
 
       font-weight: 700;
