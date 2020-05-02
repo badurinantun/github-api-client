@@ -34,13 +34,16 @@ const App = ({ Component, pageProps, apollo }) => (
             min-height: 100vh;
             scroll-behavior: smooth;
             text-rendering: optimizeSpeed;
-            background-color: ${theme.colors.primary};
-            color: ${theme.colors.secondary};
+            background-color: ${theme.colors.white};
+            color: ${theme.colors.text};
             font-family: ${theme.typography.fontFamily};
+            line-height: 1.5;
           }
 
           input,
           button {
+            outline: none;
+            border: none;
             font: inherit;
           }
         `}
