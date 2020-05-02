@@ -55,6 +55,8 @@ export const UserCard: React.FC<UserCardProps> = ({ user, textMatches }) => {
         </a>
       </p>
 
+      {user.bio && <p>{highlightProperty('profile_bio', user.bio)}</p>}
+
       {user.location && <p>{highlightProperty('location', user.location)}</p>}
 
       {user.email && (

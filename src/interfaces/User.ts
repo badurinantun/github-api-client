@@ -6,4 +6,5 @@ export interface User {
   avatarUrl: string;
   url: string;
   location: string;
+  bio: string;
 }

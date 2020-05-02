@@ -10,6 +10,7 @@ export const CommonFragments = {
       avatarUrl
       url
       location
+      bio
     }
   `,
   pageInfo: gql`
