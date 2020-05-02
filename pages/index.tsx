@@ -15,7 +15,6 @@ import { Theme } from '../src/theme/theme';
 import { Input } from '../src/components/input';
 import { Spinner } from '../src/components/spinner';
 import { UserCard } from '../src/components/userCard';
-import { User } from '../src/interfaces/User';
 
 function HomePage() {
   const { pagination, next, previous } = usePagination(5);
@@ -82,7 +81,7 @@ function HomePage() {
 
         {!loading && data?.search && (
           <Results title="users" totalCount={data.search.userCount}>
-            {data.search.nodes.map((user: User) => (
+            {data.search.edges.map(({ node: user, textMatches }) => (
               <Link key={user.id} href="/profile/[login]" as={`/profile/${user.login}`}>
                 <div
                   css={(theme: Theme) => css`
@@ -94,7 +93,7 @@ function HomePage() {
                     }
                   `}
                 >
-                  <UserCard user={user} />
+                  <UserCard user={user} textMatches={textMatches} />
                 </div>
               </Link>
             ))}

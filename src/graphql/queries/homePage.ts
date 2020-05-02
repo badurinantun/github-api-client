@@ -12,6 +12,18 @@ export const SEARCH_USERS = gql`
       nodes {
         ...User
       }
+      edges {
+        cursor
+        node {
+          ...User
+        }
+        textMatches {
+          property
+          highlights {
+            text
+          }
+        }
+      }
     }
   }
 
