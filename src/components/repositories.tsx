@@ -6,6 +6,8 @@ import { SEARCH_REPOSITORIES } from '../graphql/queries/profilePage';
 import { RepositoriesData } from '../interfaces/RepositoriesData';
 import { Results } from './results';
 import { Pagination } from './pagination';
+import { SortDirection } from '../enums/SortDirection';
+import { RepositoryOrder } from '../interfaces/RepositoryOrder';
 
 interface RepositoriesProps {
   login: string;
@@ -13,15 +15,29 @@ interface RepositoriesProps {
 
 export const Repositories: React.FC<RepositoriesProps> = ({ login }) => {
   const { pagination, next, previous } = usePagination(6);
-  const [direction] = React.useState(null);
+  const [orderBy, setOrderBy] = React.useState<RepositoryOrder>(null);
 
   const { data, error, loading } = useQuery<RepositoriesData>(SEARCH_REPOSITORIES, {
     variables: {
       login,
-      direction,
+      orderBy,
       ...pagination,
     },
   });
+
+  const handleSort = () => {
+    setOrderBy((orderBy: RepositoryOrder) => {
+      let direction: SortDirection;
+
+      if (!orderBy) {
+        direction = SortDirection.ASC;
+      } else {
+        direction = orderBy.direction === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
+      }
+
+      return { field: 'NAME', direction };
+    });
+  };
 
   return (
     <React.Fragment>
@@ -39,6 +55,8 @@ export const Repositories: React.FC<RepositoriesProps> = ({ login }) => {
               </a>
             </div>
           ))}
+          <button onClick={handleSort}>sort</button>
+
           <Pagination pageInfo={data.user.repositories.pageInfo} next={next} previous={previous} />
         </Results>
       )}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
+import Link from 'next/link';
 
 import { GET_PROFILE } from '../../src/graphql/queries/profilePage';
 import { Repositories } from '../../src/components/repositories';
@@ -19,6 +20,9 @@ const ProfilePage = () => {
 
   return (
     <div>
+      <Link href="../../">
+        <a>back</a>
+      </Link>
       {loading && <p>Loading...</p>}
       {error && <pre>{JSON.stringify({ error }, null, 2)}</pre>}
 

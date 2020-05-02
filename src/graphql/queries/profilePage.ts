@@ -15,7 +15,7 @@ export const GET_PROFILE = gql`
 export const SEARCH_REPOSITORIES = gql`
   query searchRepositories(
     $login: String!
-    $direction: OrderDirection
+    $orderBy: RepositoryOrder
     $first: Int
     $last: Int
     $before: String
@@ -24,7 +24,7 @@ export const SEARCH_REPOSITORIES = gql`
     user(login: $login) {
       id
       repositories(
-        orderBy: { field: NAME, direction: $direction }
+        orderBy: $orderBy
         privacy: PUBLIC
         ownerAffiliations: [OWNER]
         first: $first
@@ -37,14 +37,12 @@ export const SEARCH_REPOSITORIES = gql`
           ...PageInfo
         }
         nodes {
-          id
-          name
-          description
-          url
+          ...UserRepository
         }
       }
     }
   }
 
   ${CommonFragments.pageInfo}
+  ${ProfilePageFragments.repository}
 `;

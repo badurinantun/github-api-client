@@ -11,4 +11,12 @@ export const ProfilePageFragments = {
       url
     }
   `,
+  repository: gql`
+    fragment UserRepository on Repository {
+      id
+      name
+      description
+      url
+    }
+  `,
 };
