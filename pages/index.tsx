@@ -46,11 +46,9 @@ function HomePage() {
         <Results totalCount={data.search.userCount}>
           {data.search.nodes.map(({ id, login }) => (
             <div key={id}>
-              <div>
-                <Link href="/profile/[login]" as={`/profile/${login}`}>
-                  <a>{login}</a>
-                </Link>
-              </div>
+              <Link href="/profile/[login]" as={`/profile/${login}`}>
+                <a>{login}</a>
+              </Link>
             </div>
           ))}
           <Pagination pageInfo={data.search.pageInfo} next={next} previous={previous} />

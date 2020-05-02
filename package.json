@@ -20,7 +20,9 @@
   "homepage": "https://github.com/badurinantun/github-api-client#readme",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
+    "@emotion/core": "^10.0.28",
     "apollo-boost": "^0.4.7",
+    "emotion-theming": "^10.0.27",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.3",
     "isomorphic-unfetch": "^3.0.0",
@@ -31,10 +33,12 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "babel-plugin-emotion": "^10.0.33",
     "dotenv-webpack": "^1.7.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
