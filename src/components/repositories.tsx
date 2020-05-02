@@ -68,7 +68,7 @@ export const Repositories: React.FC<RepositoriesProps> = ({ login }) => {
         </div>
       )}
 
-      {data && (
+      {!loading && data && (
         <Results title="Repositories" totalCount={data.user.repositories.totalCount}>
           {data.user.repositories.nodes.map((repository) => (
             <div
