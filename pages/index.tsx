@@ -9,6 +9,7 @@ import { Results } from '../src/components/results';
 import { Pagination } from '../src/components/pagination';
 import { usePagination } from '../src/hooks/usePagination';
 import { SEARCH_USERS } from '../src/graphql/queries/homePage';
+import { Grid } from '../src/components/layout/grid';
 
 function HomePage() {
   const { pagination, next, previous } = usePagination(10);
@@ -37,7 +38,7 @@ function HomePage() {
   };
 
   return (
-    <div>
+    <Grid>
       {loading && <p>Loading...</p>}
       {error && <pre>{JSON.stringify({ error }, null, 2)}</pre>}
 
@@ -54,7 +55,7 @@ function HomePage() {
           <Pagination pageInfo={data.search.pageInfo} next={next} previous={previous} />
         </Results>
       )}
-    </div>
+    </Grid>
   );
 }
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { Global, css } from '@emotion/core';
 
 import { theme, Theme } from '../src/theme/theme';
+import { Layout } from '../src/components/layout/layout';
 
 const GRAPHQL_URL = 'https://api.github.com/graphql';
 
@@ -44,7 +45,9 @@ const App = ({ Component, pageProps, apollo }) => (
           }
         `}
       />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   </ApolloProvider>
 );
