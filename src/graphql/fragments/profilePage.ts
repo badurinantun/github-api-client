@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const ProfileFragments = {
+export const ProfilePageFragments = {
   user: gql`
     fragment UserProfile on User {
       id
@@ -8,6 +8,7 @@ export const ProfileFragments = {
       name
       email
       avatarUrl
+      url
     }
   `,
 };
