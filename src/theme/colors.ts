@@ -1,4 +1,8 @@
 export const colors = {
-  anzac: '#e5c051',
-  outerSpace: '#1c2526',
+  shark: '#24292e',
+  white: '#ffffff',
+  aquaHaze: '#eff3f6',
+  scienceBlue: '#0366d6',
+  iron: '#d1d5da',
+  shuttleGray: '#586069',
 };

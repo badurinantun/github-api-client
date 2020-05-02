@@ -2,11 +2,24 @@ import { colors } from './colors';
 
 export const theme = {
   colors: {
-    primary: colors.anzac,
-    secondary: colors.outerSpace,
+    primary: colors.aquaHaze,
+    secondary: colors.shark,
+    highlight: colors.scienceBlue,
+    white: colors.white,
+    border: colors.iron,
+    text: colors.shuttleGray,
   },
   typography: {
-    fontFamily: ['Helvetica Neu', 'sans-serif'].join(','),
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Segoe UI',
+      'Helvetica',
+      'Arial',
+      'sans-serif',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+    ].join(','),
   },
   breakpoints: {
     xs: '0',
@@ -15,7 +28,7 @@ export const theme = {
     lg: '1056px',
   },
   spacing(space: number) {
-    return 2 ** space;
+    return `${2 ** space}px`;
   },
 };
 
