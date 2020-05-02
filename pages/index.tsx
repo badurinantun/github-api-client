@@ -15,10 +15,11 @@ import { Theme } from '../src/theme/theme';
 import { Input } from '../src/components/input';
 import { Spinner } from '../src/components/spinner';
 import { UserCard } from '../src/components/userCard';
+import { useSearchQuery } from '../src/hooks/useSearchQuery';
 
 function HomePage() {
   const { pagination, next, previous } = usePagination(5);
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = useSearchQuery();
 
   const [searchUsers, { data, error, loading }] = useLazyQuery<SearchData<UserSearchResult>>(SEARCH_USERS, {
     variables: {

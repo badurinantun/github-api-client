@@ -7,6 +7,7 @@ import { Global, css } from '@emotion/core';
 
 import { theme, Theme } from '../src/theme/theme';
 import { Layout } from '../src/components/layout/layout';
+import { SearchQueryProvider } from '../src/hooks/useSearchQuery';
 
 const GRAPHQL_URL = 'https://api.github.com/graphql';
 
@@ -49,7 +50,9 @@ const App = ({ Component, pageProps, apollo }) => (
         `}
       />
       <Layout>
-        <Component {...pageProps} />
+        <SearchQueryProvider>
+          <Component {...pageProps} />
+        </SearchQueryProvider>
       </Layout>
     </ThemeProvider>
   </ApolloProvider>
