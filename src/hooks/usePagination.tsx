@@ -3,6 +3,7 @@ import React from 'react';
 enum PaginationActionType {
   PREVIOUS,
   NEXT,
+  RESET,
 }
 
 interface PaginationState {
@@ -14,7 +15,7 @@ interface PaginationState {
 
 interface PaginationAction {
   type: PaginationActionType;
-  payload: {
+  payload?: {
     cursor: string;
   };
 }
@@ -27,6 +28,9 @@ function generatePaginationReducer(pageSize: number): React.Reducer<PaginationSt
       }
       case PaginationActionType.NEXT: {
         return { first: pageSize, last: null, before: null, after: action.payload.cursor };
+      }
+      case PaginationActionType.RESET: {
+        return { first: pageSize, last: null, before: null, after: null };
       }
       default: {
         throw new Error(`Unhandled type: ${action.type}`);
@@ -50,6 +54,9 @@ export function usePagination(pageSize: number) {
   const previous = React.useCallback((cursor: string) => {
     dispatch({ type: PaginationActionType.PREVIOUS, payload: { cursor } });
   }, []);
+  const reset = React.useCallback(() => {
+    dispatch({ type: PaginationActionType.RESET });
+  }, []);
 
-  return { pagination, next, previous };
+  return { pagination, next, previous, reset };
 }

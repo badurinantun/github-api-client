@@ -18,7 +18,7 @@ import { UserCard } from '../src/components/userCard';
 import { useSearchQuery } from '../src/hooks/useSearchQuery';
 
 function HomePage() {
-  const { pagination, next, previous } = usePagination(5);
+  const { pagination, next, previous, reset: resetPagination } = usePagination(5);
   const [query, setQuery] = useSearchQuery();
 
   const [searchUsers, { data, error, loading }] = useLazyQuery<SearchData<UserSearchResult>>(SEARCH_USERS, {
@@ -41,6 +41,7 @@ function HomePage() {
 
   const handleSearch = (event: React.SyntheticEvent<HTMLInputElement>) => {
     setQuery(event.currentTarget.value);
+    resetPagination();
   };
 
   return (

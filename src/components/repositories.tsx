@@ -19,7 +19,7 @@ interface RepositoriesProps {
 }
 
 export const Repositories: React.FC<RepositoriesProps> = ({ login }) => {
-  const { pagination, next, previous } = usePagination(6);
+  const { pagination, next, previous, reset: resetPagination } = usePagination(6);
   const [orderBy, setOrderBy] = React.useState<RepositoryOrder>(null);
 
   const { data, error, loading } = useQuery<RepositoriesData>(SEARCH_REPOSITORIES, {
@@ -42,6 +42,7 @@ export const Repositories: React.FC<RepositoriesProps> = ({ login }) => {
 
       return { field: 'NAME', direction };
     });
+    resetPagination();
   };
 
   const sortLabel = orderBy?.direction === SortDirection.ASC ? 'descending' : 'ascending';
