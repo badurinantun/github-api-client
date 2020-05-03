@@ -3,7 +3,7 @@ import { css, keyframes } from '@emotion/core';
 
 import { Theme } from '../theme/theme';
 
-const pulse = keyframes`
+const spin = keyframes`
   from {
     transform: rotate(0deg);
   }
@@ -18,8 +18,13 @@ export const Spinner: React.FC = () => (
     css={(theme: Theme) => css`
       width: 40px;
       height: 40px;
-      background-color: ${theme.colors.highlight};
-      animation: ${pulse} 2s 0s infinite linear normal;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 4px solid ${theme.colors.primary};
+      border-top-color: ${theme.colors.highlight};
+      border-bottom-color: ${theme.colors.highlight};
+
+      animation: ${spin} 1s 0s infinite linear normal;
     `}
   />
 );
