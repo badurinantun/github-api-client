@@ -23,6 +23,19 @@ export const Layout: React.FC = ({ children }) => (
         }
       `}
     >
+      <header>
+        <h1
+          css={(theme: Theme) => css`
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: ${theme.spacing(2)} 0;
+            color: ${theme.colors.highlight};
+            letter-spacing: ${theme.spacing(2)};
+          `}
+        >
+          Git Happens
+        </h1>
+      </header>
       {children}
     </main>
   </React.Fragment>
