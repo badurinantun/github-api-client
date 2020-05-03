@@ -23,12 +23,15 @@ export const Layout: React.FC = ({ children }) => (
         }
       `}
     >
-      <header>
+      <header
+        css={(theme: Theme) => css`
+          padding: ${theme.spacing(5)} 0;
+        `}
+      >
         <h1
           css={(theme: Theme) => css`
             text-transform: uppercase;
             font-weight: bold;
-            padding: ${theme.spacing(2)} 0;
             color: ${theme.colors.highlight};
             letter-spacing: ${theme.spacing(2)};
           `}
